@@ -1,3 +1,4 @@
+/// <reference path="./types.d.ts"
 const readline = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -7,7 +8,9 @@ const readline = require('readline').createInterface({
 
 // const Universe = require('./Entities/Environment/Universe');
 import Universe from './Entities/Environment/Universe';
-import Ship from './Entities/Ship'
+import Ship from './Entities/Ship';
+import Planet from './Entities/Environment/Planet';
+import { Resource } from './types';
 // const ship = require('./Entities/Ship');
 
 
@@ -57,20 +60,46 @@ const recursiveAsyncReadLine = () => {
                 console.log(player);
                 break;
             case 'location':
-                console.log(player.location.system.name);
+                console.log('System:', player.location.system.name);
+                if (player.location.local) {
+                    console.log('Local:' , player.location.local.name)
+                    console.log(player.location.local);
+                }
                 break;
-            case 'listsys':
-                console.log(Universe.listNeighbourSystems(player.location.system.name))
+            case 'list':
+                if (args[0] === 'system') {
+                    console.log(Universe.listNeighbourSystems(player.location.system.name))
+                }
+                if (args[0] === 'local') {
+                    console.log(player.location.system.listEntities());
+                }
+                break;
+            case 'jump':
+                player.jump(args.join(' '));
                 break;
             case 'move':
                 player.move(args.join(' '));
                 break;
+            case 'harvest':
+                if (args[0] === 'start') {
+                    if(player.location.local && player.location.local instanceof Planet) {
+                        player.startHarvesting(player.location.local, Resource.minerals);
+                    } else {
+                        console.log('cant harvest here');
+                    }
+                }
+                if (args[0] === 'stop') {
+                    player.stopHarvesting();
+                }
+                break;
+
             case 'exit':
                 readline.close();
                 process.exit();
                 break;
             default:
-                console.log('status | listsys | location | move | exit');
+                console.log('status | list [local, system] | location');
+                console.log('jump (systemName)| move (localEntity) | harvest [start, stop] | exit');
                 break;
         }
       recursiveAsyncReadLine();
