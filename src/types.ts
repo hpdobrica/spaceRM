@@ -1,15 +1,32 @@
 import System from './Entities/Environment/System';
 import Planet from './Entities/Environment/Planet';
 import Ship from './Entities/Ship';
+import Station from './Entities/Station';
+
+export declare type Entity = Planet | Ship | Station;
+
+export declare enum Entities {
+    planets = "planets",
+    ships = "ships", 
+    stations = "stations"
+}
+
+export declare enum Resources {
+    minerals = "minerals",
+    gas = "gas",
+}
+
 
 export declare interface LocationObject {
     system: System;
-    local?: Planet | Ship
+    local?: Entity
 }
 
 export declare interface ResourcesObject {
     minerals: number;
     gas: number;
+    [key: string]: number;
+    // [key in Resources]: number;
 }
 
 export declare interface IHarvester {
@@ -45,7 +62,3 @@ export declare interface IMovable {
     // move: (entityName: string) => boolean;
 }
 
-export declare const enum Resource {
-    minerals = "minerals",
-    gas = "gas",
-}

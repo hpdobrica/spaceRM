@@ -14,8 +14,9 @@ const planets = [
 ] 
 
 planets.forEach((planet) => {
+    console.log('adding planet', planet.name)
     system.addEntity(planet);
 })
 
 
-
+export default system;

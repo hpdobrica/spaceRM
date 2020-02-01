@@ -7,17 +7,16 @@ const readline = require('readline').createInterface({
 
 
 // const Universe = require('./Entities/Environment/Universe');
-import Universe from './Entities/Environment/Universe';
+// import Universe from './Entities/Environment/Universe';
+import Universe from './Universe';
 import Ship from './Entities/Ship';
 import Planet from './Entities/Environment/Planet';
-import { Resource } from './types';
+import { Resources, Entities } from './types';
 // const ship = require('./Entities/Ship');
 
 
 // console.log(Universe.listSystems());
 
-// Universe.addSystem('Ursula 14');
-// Universe.addSystem('Ursula 15');
 // Universe.connectSystems('Ursula 14', 'Ursula 15');
 
 // Universe.addSystem('Andromeda Alpha 1');
@@ -37,16 +36,16 @@ import { Resource } from './types';
 
 // console.log(Universe.getSystem('Ursula 15'));
 
-const player = new Ship('Player', 'Ursula 15');
+const player = new Ship('Player', 'Alpha Lupi');
 
 // console.log(player.location);
 
-player.move('Andromeda Alpha 2');
+// player.move('Andromeda Alpha 2');
 
 // console.log(player.location);
 
 
-player.move('Andromeda Alpha 1');
+// player.move('Andromeda Alpha 1');
 
 
 // console.log(player.location);
@@ -71,19 +70,19 @@ const recursiveAsyncReadLine = () => {
                     console.log(Universe.listNeighbourSystems(player.location.system.name))
                 }
                 if (args[0] === 'local') {
-                    console.log(player.location.system.listEntities());
+                    console.log(player.location.system.listEntities(args[1] as Entities));
                 }
                 break;
             case 'jump':
                 player.jump(args.join(' '));
                 break;
             case 'move':
-                player.move(args.join(' '));
+                player.move(args[0] as Entities, args[1]);
                 break;
             case 'harvest':
                 if (args[0] === 'start') {
                     if(player.location.local && player.location.local instanceof Planet) {
-                        player.startHarvesting(player.location.local, Resource.minerals);
+                        player.startHarvesting(player.location.local, Resources.minerals);
                     } else {
                         console.log('cant harvest here');
                     }
@@ -99,7 +98,7 @@ const recursiveAsyncReadLine = () => {
                 break;
             default:
                 console.log('status | list [local, system] | location');
-                console.log('jump (systemName)| move (localEntity) | harvest [start, stop] | exit');
+                console.log('jump (systemName)| move (entityType, localEntity) | harvest [start, stop] | exit');
                 break;
         }
       recursiveAsyncReadLine();

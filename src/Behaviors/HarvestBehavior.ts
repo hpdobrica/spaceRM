@@ -1,4 +1,4 @@
-import { ResourcesObject, Resource, IHarvestable, IHarvester } from "../types";
+import { Resources, IHarvestable, IHarvester } from "../types";
 
 
 class HarvestBehavior implements IHarvester {
@@ -7,7 +7,7 @@ class HarvestBehavior implements IHarvester {
 
     constructor(obj: IHarvester){}
 
-    public startHarvesting(harvestable: IHarvestable, targetResource: Resource) {
+    public startHarvesting(harvestable: IHarvestable, targetResource: Resources) {
         this.harvestData.intervalHandle = setInterval(() => {
             let valueToHarvest = 0;
             if(harvestable.resources[targetResource] - this.harvestData.amount < 0) {

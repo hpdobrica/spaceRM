@@ -1,5 +1,7 @@
 import utils from '../../utils';
 import Planet from './Planet';
+import Station from '../Station';
+import { Entity, Entities } from '../../types';
 
 const has = Object.hasOwnProperty;
 
@@ -7,15 +9,16 @@ const has = Object.hasOwnProperty;
 class System {
     name: string;
     entities: {
-        planets: Planet[];
-        [key: string]: Planet[];
+        [key in Entities]: Entity[];
     }
     
 
     constructor(name: string) {
         this.name = name;
         this.entities = {
-            planets: []
+            planets: [],
+            stations: [],
+            ships: [],
         }
 
         // const numberOfPlanets = utils.randomNumber(0, 5);
@@ -25,18 +28,18 @@ class System {
         // }
     }
 
-    listEntities(): string[] {
-        const result: Planet[] = [];
-        Object.keys(this.entities).forEach((entityKey) => {
-            result.push(...this.entities[entityKey])
-        })
+    listEntities(entityType: Entities): string[] {
+        const result: Entity[] = [];
+        // Object.keys(this.entities).forEach((entityKey) => {
+            result.push(...this.entities[entityType])
+        // })
         return result.map(entity => entity.name);
     }
 
-    getEntity(entityName: string): Planet {
-        const entityKeys = Object.keys(this.entities);
+    getEntity(entityName: string): Entity {
+        const entityKeys = Object.values(Entities);
         for (let i = 0; i< entityKeys.length; i++) {
-            const foundEntity = this.entities[entityKeys[i]].find((entity) => entity.name === entityName)
+            const foundEntity = this.entities[entityKeys[i]].find((entity: Entity) => entity.name === entityName)
             if(foundEntity) {
                 return foundEntity;
             }
