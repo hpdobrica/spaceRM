@@ -18,11 +18,11 @@ class System {
             planets: []
         }
 
-        const numberOfPlanets = utils.randomNumber(0, 5);
+        // const numberOfPlanets = utils.randomNumber(0, 5);
 
-        for (let i = 0; i < numberOfPlanets; i += 1) {
-            this.entities.planets.push(new Planet(this));
-        }
+        // for (let i = 0; i < numberOfPlanets; i += 1) {
+        //     this.entities.planets.push(new Planet(this));
+        // }
     }
 
     listEntities(): string[] {
@@ -34,7 +34,6 @@ class System {
     }
 
     getEntity(entityName: string): Planet {
-        let result;
         const entityKeys = Object.keys(this.entities);
         for (let i = 0; i< entityKeys.length; i++) {
             const foundEntity = this.entities[entityKeys[i]].find((entity) => entity.name === entityName)
@@ -43,6 +42,10 @@ class System {
             }
         }
         throw new Error('ENTITY_NOT_FOUND');
+    }
+
+    addEntity(entity: Planet): void {
+        this.entities.planets.push(entity);
     }
 
 }

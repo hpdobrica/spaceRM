@@ -1,31 +1,13 @@
-import { ResourcesObject, Resource, HarvestableInterface } from "../types";
-
-declare interface HarvesterInterface {
-    resources: {
-        max: ResourcesObject;
-        available: ResourcesObject;
-    }
-    harvestData: {
-        interval: number;
-        amount: number;
-    }
-}
+import { ResourcesObject, Resource, IHarvestable, IHarvester } from "../types";
 
 
-class HarvestBehavior implements HarvesterInterface {
-    resources: {
-        max: ResourcesObject;
-        available: ResourcesObject;
-    }
-    harvestData: {
-        interval: number;
-        amount: number;
-        intervalHandle?: NodeJS.Timeout;
-    }
+class HarvestBehavior implements IHarvester {
+    resources: IHarvester['resources']
+    harvestData: IHarvester['harvestData']
 
-    constructor(obj: HarvesterInterface){}
+    constructor(obj: IHarvester){}
 
-    public startHarvesting(harvestable: HarvestableInterface, targetResource: Resource) {
+    public startHarvesting(harvestable: IHarvestable, targetResource: Resource) {
         this.harvestData.intervalHandle = setInterval(() => {
             let valueToHarvest = 0;
             if(harvestable.resources[targetResource] - this.harvestData.amount < 0) {

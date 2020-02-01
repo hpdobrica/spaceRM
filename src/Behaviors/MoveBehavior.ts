@@ -1,15 +1,11 @@
-import System from "../Entities/Environment/System";
 import Universe from "../Entities/Environment/Universe";
-import { LocationObject } from "../types";
+import { LocationObject, IMovable } from "../types";
 
-declare interface MoveInterface {
-    location: LocationObject;
-}
 
-class MoveBehavior implements MoveInterface{
+class MoveBehavior implements IMovable {
     location: LocationObject;
 
-    constructor(obj : MoveInterface) {};
+    constructor(obj : IMovable) {};
 
     public jump(systemName: string):boolean {
         try {
@@ -42,4 +38,3 @@ class MoveBehavior implements MoveInterface{
 }
 
 export default MoveBehavior;
-

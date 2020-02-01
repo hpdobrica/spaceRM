@@ -1,32 +1,21 @@
 import Universe from './Environment/Universe';
-import MoveBehavior from '../Behaviors/MoveBehavior';
 
-import { LocationObject, ResourcesObject } from '../types';
+
+import { IHarvester, IMovable } from '../types';
+import MoveBehavior from '../Behaviors/MoveBehavior';
 import HarvestBehavior from '../Behaviors/HarvestBehavior';
 
-interface ShipInterface {
-    jump: MoveBehavior["jump"]
-    move: MoveBehavior["move"]
-    startHarvesting: HarvestBehavior["startHarvesting"]
-    stopHarvesting: HarvestBehavior["stopHarvesting"]
-}
-
-class Ship implements ShipInterface{
+class Ship implements IHarvester, IMovable {
     name: string;
-    resources: {
-        max: ResourcesObject,
-        available: ResourcesObject
-    };
-    location: LocationObject;
-    harvestData: {
-        interval: number;
-        amount: number;
-    }
+    
+    location: MoveBehavior['location'];
+    jump: MoveBehavior["jump"];
+    move: MoveBehavior["move"];
 
-    jump: MoveBehavior["jump"]
-    move: MoveBehavior["move"]
-    startHarvesting: HarvestBehavior["startHarvesting"]
-    stopHarvesting: HarvestBehavior["stopHarvesting"]
+    resources: HarvestBehavior['resources'];
+    harvestData: HarvestBehavior['harvestData'];
+    startHarvesting: HarvestBehavior["startHarvesting"];
+    stopHarvesting: HarvestBehavior["stopHarvesting"];
 
     constructor(name:string, systemName:string) {
         this.name = name;

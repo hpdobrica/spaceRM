@@ -1,16 +1,17 @@
 import utils from '../../utils';
 import System from './System';
+import { IHarvestable } from '../../types';
 
 
-class Planet {
+class Planet implements IHarvestable {
     name: string;
     resources: {
         minerals: number;
         gas: number;
     }
 
-    constructor(system: System) {
-        this.name = `${system.name} ${utils.randomLetter()}${utils.randomNumber(0,100)}`;
+    constructor(name: string) {
+        this.name = name;
         this.resources = {
             minerals: utils.randomNumber(0, 1000),
             gas: utils.randomNumber(0, 100),

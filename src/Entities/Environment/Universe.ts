@@ -17,8 +17,7 @@ class Universe {
         this.connections = {};
     }
 
-    addSystem(name:string):void {
-        const system = new System(name);
+    addSystem(system: System):void {
         this.systems[system.name] = system;
         this.connections[system.name] = [];
     }

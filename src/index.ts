@@ -16,19 +16,19 @@ import { Resource } from './types';
 
 // console.log(Universe.listSystems());
 
-Universe.addSystem('Ursula 14');
-Universe.addSystem('Ursula 15');
-Universe.connectSystems('Ursula 14', 'Ursula 15');
+// Universe.addSystem('Ursula 14');
+// Universe.addSystem('Ursula 15');
+// Universe.connectSystems('Ursula 14', 'Ursula 15');
 
-Universe.addSystem('Andromeda Alpha 1');
-Universe.addSystem('Andromeda Alpha 2');
+// Universe.addSystem('Andromeda Alpha 1');
+// Universe.addSystem('Andromeda Alpha 2');
 
 
-Universe.addSystem('Andromeda Beta 1');
+// Universe.addSystem('Andromeda Beta 1');
 
-Universe.connectSystems('Ursula 15', 'Andromeda Alpha 1');
-Universe.connectSystems('Andromeda Alpha 1', 'Andromeda Alpha 2');
-Universe.connectSystems('Andromeda Alpha 2', 'Andromeda Beta 1');
+// Universe.connectSystems('Ursula 15', 'Andromeda Alpha 1');
+// Universe.connectSystems('Andromeda Alpha 1', 'Andromeda Alpha 2');
+// Universe.connectSystems('Andromeda Alpha 2', 'Andromeda Beta 1');
 
 // console.log(Universe.listSystems());
 
