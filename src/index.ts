@@ -70,7 +70,12 @@ const recursiveAsyncReadLine = () => {
                     console.log(Universe.listNeighbourSystems(player.location.system.name))
                 }
                 if (args[0] === 'local') {
-                    console.log(player.location.system.listEntities(args[1] as ENTITY));
+                    if(Object.values(ENTITY).includes(args[1] as ENTITY)) {
+                        console.log(player.location.system.listEntities(args[1] as ENTITY));
+                    }else {
+                        console.log('not an entity')
+                    }
+                    
                 }
                 break;
             case 'jump':
