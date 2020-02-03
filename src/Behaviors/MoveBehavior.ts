@@ -1,5 +1,5 @@
 import Universe from "../Entities/Environment/Universe";
-import { LocationObject, IMovable, Entities } from "../types";
+import { LocationObject, IMovable, ENTITY } from "../types";
 
 
 class MoveBehavior implements IMovable {
@@ -21,7 +21,7 @@ class MoveBehavior implements IMovable {
             return false;
         }
     }
-    public move(entityType: Entities, entityName: string): boolean {
+    public move(entityType: ENTITY, entityName: string): boolean {
         try {
             const availableEntities = this.location.system.listEntities(entityType);
             if(availableEntities.includes(entityName)) {

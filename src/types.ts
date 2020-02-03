@@ -5,13 +5,13 @@ import Station from './Entities/Station';
 
 export declare type Entity = Planet | Ship | Station;
 
-export declare enum Entities {
+export enum ENTITY {
     planets = "planets",
     ships = "ships", 
     stations = "stations"
 }
 
-export declare enum Resources {
+export enum RESOURCE {
     minerals = "minerals",
     gas = "gas",
 }

@@ -1,7 +1,7 @@
 import utils from '../../utils';
 import Planet from './Planet';
 import Station from '../Station';
-import { Entity, Entities } from '../../types';
+import { Entity, ENTITY } from '../../types';
 
 const has = Object.hasOwnProperty;
 
@@ -9,7 +9,7 @@ const has = Object.hasOwnProperty;
 class System {
     name: string;
     entities: {
-        [key in Entities]: Entity[];
+        [key in ENTITY]: Entity[];
     }
     
 
@@ -28,7 +28,7 @@ class System {
         // }
     }
 
-    listEntities(entityType: Entities): string[] {
+    listEntities(entityType: ENTITY): string[] {
         const result: Entity[] = [];
         // Object.keys(this.entities).forEach((entityKey) => {
             result.push(...this.entities[entityType])
@@ -37,7 +37,7 @@ class System {
     }
 
     getEntity(entityName: string): Entity {
-        const entityKeys = Object.values(Entities);
+        const entityKeys = Object.values(ENTITY);
         for (let i = 0; i< entityKeys.length; i++) {
             const foundEntity = this.entities[entityKeys[i]].find((entity: Entity) => entity.name === entityName)
             if(foundEntity) {

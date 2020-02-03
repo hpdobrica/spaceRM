@@ -11,7 +11,7 @@ const readline = require('readline').createInterface({
 import Universe from './Universe';
 import Ship from './Entities/Ship';
 import Planet from './Entities/Environment/Planet';
-import { Resources, Entities } from './types';
+import { RESOURCE, ENTITY } from './types';
 // const ship = require('./Entities/Ship');
 
 
@@ -70,19 +70,19 @@ const recursiveAsyncReadLine = () => {
                     console.log(Universe.listNeighbourSystems(player.location.system.name))
                 }
                 if (args[0] === 'local') {
-                    console.log(player.location.system.listEntities(args[1] as Entities));
+                    console.log(player.location.system.listEntities(args[1] as ENTITY));
                 }
                 break;
             case 'jump':
                 player.jump(args.join(' '));
                 break;
             case 'move':
-                player.move(args[0] as Entities, args[1]);
+                player.move(args[0] as ENTITY, args[1]);
                 break;
             case 'harvest':
                 if (args[0] === 'start') {
                     if(player.location.local && player.location.local instanceof Planet) {
-                        player.startHarvesting(player.location.local, Resources.minerals);
+                        player.startHarvesting(player.location.local, RESOURCE.minerals);
                     } else {
                         console.log('cant harvest here');
                     }
